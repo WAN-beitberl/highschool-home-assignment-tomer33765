@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `myschema` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `myschema`;
 -- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: myschema
@@ -16,6 +14,29 @@ USE `myschema`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cars`
+--
+
+DROP TABLE IF EXISTS `cars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cars` (
+  `stud_id` int unsigned NOT NULL,
+  `car_color` varchar(45) NOT NULL,
+  PRIMARY KEY (`stud_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cars`
+--
+
+LOCK TABLES `cars` WRITE;
+/*!40000 ALTER TABLE `cars` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cars` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `highschool`
@@ -65,7 +86,11 @@ CREATE TABLE `highschool_friendships` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `friend_id` int unsigned DEFAULT NULL,
   `other_friend_id` int unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `friend_id_idx` (`friend_id`),
+  KEY `other_friend_id_idx` (`other_friend_id`),
+  CONSTRAINT `friend_id` FOREIGN KEY (`friend_id`) REFERENCES `highschool` (`id`),
+  CONSTRAINT `other_friend_id` FOREIGN KEY (`other_friend_id`) REFERENCES `highschool` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,4 +144,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-28 15:39:40
+-- Dump completed on 2023-02-01 10:23:20
